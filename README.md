@@ -2,6 +2,60 @@
 
 A Next.js-based chat application that allows users to interact with various language models. The application includes user management, chat history, bookmarks, and a credit system.
 
+
+## Entity-Relationship Diagram
+
+```mermaid
+erDiagram
+    USERS ||--o{ CHATS : "has many"
+    USERS {
+        int id PK
+        varchar username UK
+        varchar name
+        varchar email UK
+        float credits
+        timestamp created_at
+    }
+
+    LLM_MODELS ||--o{ CHAT_MODELS : "used in"
+    LLM_MODELS {
+        int id PK
+        varchar name
+        text description
+        float token_cost
+        varchar model_path
+        varchar parameters
+        timestamp added_at
+    }
+
+    CHATS ||--o{ BOOKMARKS : "has many"
+    CHATS ||--o{ CHAT_MODELS : "uses"
+    CHATS {
+        int id PK
+        int user_id FK
+        timestamp created_at
+        timestamp updated_at
+        varchar title
+        json chat_data
+    }
+
+    CHAT_MODELS {
+        int id PK
+        int chat_id FK
+        int model_id FK
+        timestamp used_at
+    }
+
+    BOOKMARKS {
+        int id PK
+        int chat_id FK
+        varchar name
+        text description
+        json position_data
+        timestamp created_at
+    }
+```
+
 ## Features
 
 - **Multiple Language Models**: Interact with different AI models including:
