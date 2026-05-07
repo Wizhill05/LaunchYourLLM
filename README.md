@@ -1,4 +1,4 @@
-# Beep Boop Chat
+# Launch YOur LLM
 
 A Next.js-based chat application that allows users to interact with various language models. The application includes user management, chat history, bookmarks, and a credit system.
 
